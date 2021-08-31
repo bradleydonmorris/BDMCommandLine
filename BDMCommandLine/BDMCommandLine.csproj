@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Bradley Don Morris</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/bradleydonmorris/BDMCommandLine</RepositoryUrl>
+    <PackageProjectUrl>https://bradleydonmorris.me/packages/BDMCommandLine</PackageProjectUrl>
+    <Version>0.0.1</Version>
+    <Copyright>Copyright © 2021 Bradley Don Morris</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\BDMSemVerGit\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="dotnet pack --output ..\nupkgs --no-build&#xD;&#xA;dotnet nuget push &quot;..\nupkgs\*.nupkg&quot; --source %25USERPROFILE%25\source\repos\nuget&#xD;&#xA;" />
+  </Target>
+
+</Project>
